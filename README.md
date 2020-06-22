@@ -1,16 +1,18 @@
 
-1. pre-requisite
+1. Pre-Requisite
 
-- Node.js
-- gulp
-- bower
+- Node.js atleast v3.3.0
+- Gulp v3.9.1
+- Gulp-cli v2.3.0
+- Bower v1.8.8
 
-2. Dependency installation
+2. Steps to follow for predominatly for AEM Developers
 
-- npm install
-- bower install
-
-3. Run dev environment
-
-- gulp serve
-
+- Clone the repo into your designated folder in your local machine.
+- Change Directory to the folder
+- Run command 	npm install -g gulp 			// Gulp will be installed globally
+- Run command 	npm install -g gulp-cli			// Gulp cli would be installed globally
+- Run command 	npm install -g bower			// Bower would be installed globally
+- Run command 	bower install --force-lastest	// Force updating the latest dependencies
+- Run command	gulp serve						// Templating Engine of pug and the compiler will compile the pug code into HTML code in "build" folder
+- HTML, CSS and JS code thus generated in build folder would be further integrated in to the AEM Code base
