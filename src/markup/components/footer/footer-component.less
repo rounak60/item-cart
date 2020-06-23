@@ -1,0 +1,109 @@
+.footer {
+    &-block {
+        background-color: #37475a;
+        color: #fff;
+        padding: 30px 0px;
+    }
+    &-column {
+        &-list {
+            li {
+                margin-bottom: 20px;
+                a {
+                    color: #fff;
+                    &:hover {
+                        text-decoration: none;
+                        color: #fff;
+                    }
+                    span.fa.fa-external-link {
+                        font-size: 15px;
+                        padding: 0px 4px;
+                    }
+                }
+            }
+        }
+    }
+    .dropdown {
+        button {
+            color: #333;
+            background-color: #eee;
+            font-weight: 300;
+            font-size: 18px;
+            border-radius: 3px;
+            box-shadow: 0 0 0;
+            font-family: Lato,sans-serif;
+            text-shadow: 0 0 transparent;
+            &:hover {
+                color: #333;
+                background-color: #eee;
+            }
+            &:focus {
+                box-shadow: none;
+                border: none;
+            }
+            &:active {
+                color: #333;
+                background-color: #eee;
+            }
+        }
+        .dropdown-menu {
+            max-height: 200px;
+            max-width: 172px;
+            overflow-y: scroll;
+            width: 100%;
+            border: none;
+            box-shadow: 0 6px 12px rgba(0,0,0,.175);
+            border-radius: 4px;
+            li {
+                a {
+                    padding: 10px 15px;
+                    font-family: Lato;
+                    font-size: 18px;
+                    &:hover {
+                        text-decoration: none;
+                        background-color: #00609a;
+                        color: #fff;
+                    }
+                }
+            }
+        }
+    }
+    &-copyright {
+        margin: 30px 0px 20px 0px;
+    }
+    &-mark {
+        font-family: Lato,sans-serif;
+        font-weight: 400;
+        font-size: 14px;
+        padding-bottom: 20px;
+    }
+}
+
+// .....Global CSS.....
+.footer-item {
+    font-size: 18px;
+    color: #fff;
+    font-family: Lato;
+    font-weight: 400;
+}
+.copy-text {
+    font-size: 16px;
+    font-family: Lato;
+    font-weight: 400;
+
+}
+.dropdown-menu>li>a {
+    display: block;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: 400;
+    line-height: 1.42857143;
+    color: #333;
+    white-space: nowrap;
+}
+.dropup .dropdown-toggle::after {
+    font-size: 30px;
+    top: 5px;
+    border-radius: 4px;
+    position: relative;
+    transform: rotate(180deg);
+}
