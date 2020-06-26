@@ -21,30 +21,20 @@
                 }
             }
             &-right {
-                .accordion {
-                    .card {
-                        border: none;
-                        &-head {
-                            &-title {
-                                cursor: pointer;
-                                padding: 14px;
-                                color: #333;
-                                border-top: 1px solid #949494;
-                                .accordion-button-icon {
-                                    color: #286ce2;
-                                    font-size: 40px;
-                                    margin-right: 15px;
-                                }
-                                &:focus {
-                                    border: 2px solid rgb(0, 95, 204);
-                                }
-                            }
-                        }
-                        &-body {
-                            color: #333;
-                            padding: 10px 30px 20px 60px;
-                        }
+                .accordianheader {
+                    background:#fff; 
+                    padding:10px 20px;
+                    border-top: 1px solid #949494;
+                    .accordion-button-icon {
+                        color: #286ce2;
+                        font-size: 40px;
+                        margin-right: 15px;
                     }
+                }
+                .accordianbody {
+                    color: #333;
+                    background-color: #fff;
+                    padding: 10px 30px 20px 60px;
                 }
             }
         }
