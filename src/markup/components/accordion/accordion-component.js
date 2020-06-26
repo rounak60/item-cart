@@ -1,3 +1,6 @@
-$('.card-head-title').click(function() {
-    $(this).toggleClass('style-border').parent().siblings().children().removeClass('style-border');
-});
+$( "#accordion" ).accordion({
+    heightStyle: "content",
+    active:false,
+    collapsible: true,
+    header:"div.accordianheader"
+  });

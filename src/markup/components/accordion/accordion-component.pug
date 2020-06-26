@@ -8,23 +8,24 @@
                     .img
                         img.w-100(src='../../../assets/images/acc-img.png', alt="medical design")
                 .accord-block-right.col-12.col-lg-7
-                    #accordionExample.accordion
-                        .card
-                            
-                            .card-head-title.d-flex.align-items-center.mb-0.collapsed(data-toggle='collapse' data-target='#collapseTwo' aria-expanded='false' aria-controls='collapseTwo') 
-                                .accordion-button-icon.fa.fa-angle-down
-                                .accord-text What is coronavirus (COVID-19)?
-                            #collapseTwo.collapse(aria-labelledby='headingTwo' data-parent='#accordionExample')
-                                .card-body.accord-desc 
-                                    a(href='' target='_blank') Coronavirus 
-                                    | is a type of virus that causes respiratory illness — an infection of the airways and lungs. COVID-19 is a new strain of coronavirus. It’s part of the same family of coronaviruses that includes the common cold.
-                        .card
-                            
-                            .card-head-title.d-flex.align-items-center.mb-0.collapsed(data-toggle='collapse' data-target='#collapseThree' aria-expanded='false' aria-controls='collapseThree') 
-                                .accordion-button-icon.fa.fa-angle-down
-                                .accord-text What are the symptoms?
-                            #collapseThree.collapse(aria-labelledby='headingThree' data-parent='#accordionExample')
-                                .card-body.accord-desc The most common early symptoms appear between 2 and 14 days after being infected. Symptoms can be mild to severe. They include fever, cough, and shortness of breath.
-                
+                    .narrowchart
+                        #accordion
+                            .accordion-list
+                                div.accordianheader.d-flex.align-items-center
+                                    .accordion-button-icon.fa.fa-angle-down
+                                    .accord-text What is coronavirus (COVID-19)?
+                                .accordianbody
+                                    .accord-desc 
+                                        a(href='' target='_blank') Coronavirus 
+                                        | is a type of virus that causes respiratory illness — an infection of the airways and lungs. COVID-19 is a new strain of coronavirus. It’s part of the same family of coronaviruses that includes the common cold.
+                            .accordion-list
+                                div.accordianheader.d-flex.align-items-center
+                                    .accordion-button-icon.fa.fa-angle-down
+                                    .accord-text What are the symptoms?
+                                .accordianbody
+                                    .accord-desc The most common early 
+                                        a(href='' target='_blank') symptoms 
+                                        | appear between 2 and 14 days after being infected. Symptoms can be mild to severe. They include fever, cough, and shortness of breath.
+
                 .img-block
                     img.w-100(src='../../../assets/images/acc-img.png', alt="")
