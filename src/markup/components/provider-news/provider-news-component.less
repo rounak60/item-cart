@@ -1,9 +1,8 @@
 .news {
     background-color: #fff;
-    &-block {
+    .news-block {
         width: 100%;
         padding: 30px 0px;
-        margin-bottom: 30px;
         @media screen and (min-width: 768px) {
             width: 50%;
         }
@@ -20,25 +19,26 @@
             }
         }
         &-list {
-            &-img {
-                width: 24px;
-                margin-right: 10px;
-            }
-            a.d-flex {
+            a.menu-item {
                 margin-bottom: 25px;
                 width: 100%;
+                font-size: 14px;
+                font-family: Lato;
+                font-weight: 700;
+                color: #286ce2! important;
+                &:hover {
+                    color: #2453a6! important;
+                }
                 @media screen and (min-width: 768px) {
                     width: 50%;
+                }
+                img {
+                    width: 24px;
+                    margin-right: 10px;
                 }
             }
         }
     }
 }
 
-// .....Global CSS.....
-.news-block-list-desc {
-    font-size: 14px;
-    font-family: Lato;
-    font-weight: 700;
-    color: #286ce2;
-}
+
