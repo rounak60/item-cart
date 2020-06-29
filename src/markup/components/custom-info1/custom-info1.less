@@ -1,23 +1,39 @@
 .custom-info {
     background-color: #f7f7f7;
     padding: 40px 0px;
-    .custom-info-block {
-        &-left {
-            .title {
+    .news-block {
+        display: flex;
+        width: 100%;
+        align-items: center;
+        flex-direction: column;
+        @media screen and (min-width: 992px) {
+            flex-direction: row;
+            justify-content: space-between;
+        }
+        &-title {
+            width: 100%;
+            @media screen and (min-width: 992px) {
+                width: 65%;
+            }
+            p.title {
                 font-size: 28px;
                 font-family: Lato;
                 font-weight: 400;
                 color: #333;
                 padding-bottom: 20px;
             }
-            .description {
+            p.description {
                 font-size: 16px;
                 font-family: Lato;
                 font-weight: 400;
                 color: #333;
             }
         }
-        &-right {
+        &-list {
+            width: 100%;
+            @media screen and (min-width: 992px) {
+                width: 35%;
+            }
             .menu-item {
                 padding-top: 20px;
                 width: 100%;
