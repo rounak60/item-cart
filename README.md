@@ -15,4 +15,20 @@
 - Run command 	npm install -g bower			// Bower would be installed globally
 - Run command 	bower install --force-lastest	// Force updating the latest dependencies
 - Run command	gulp serve						// Templating Engine of pug and the compiler will compile the pug code into HTML code in "build" folder
+- If in the enitre process, if you facing the following error  
+```
+	ReferenceError: primordials is not defined
+   		at fs.js:33:5
+```  
+   - Then delete entire contents from npm-shrinkwrap.json file & replace it with the following contents:  
+```
+    {
+      "dependencies": {
+        "graceful-fs": {
+            "version": "4.2.2"
+         }
+      }
+    }
+```  
+- Run npm install  
 - HTML, CSS and JS code thus generated in build folder would be further integrated in to the AEM Code base
