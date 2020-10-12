@@ -86,7 +86,7 @@ var itemsList = {
   var itemCountId = 0;
 $.each(itemsList.items, function(key, value) {
     $(".tile-view-container").append(`
-        <div class="item-details-container" id = "itemId-` + itemCountId + `">
+        <div class="item-details-container" data-id = "itemId-` + itemCountId + `">
             <div class="item-image-section">
                 <div class="item-discount">` + value.discount + `% off</div>
                 <img src="` + value.image + `">
@@ -111,13 +111,13 @@ $(".add-to-cart-btn").on('click',function(){
     $(this).text("Added to cart");
     $(this).css('cursor','not-allowed');
     $(this).prop("disabled", true);
-    var itemUniqueId = $(this).parents(".item-details-container").attr("id");
+    var itemUniqueId = $(this).parents(".item-details-container").attr("data-id");
     var itemName = $(this).parents(".item-details-section").find(".item-name").text();
     var itemImg = $(this).parents(".item-details-container").find(".item-image-section img").attr("src");
     var itemDisplayPrice = $(this).parent().find(".item-display-price").text();
     var itemActualPrice = $(this).parent().find(".item-actual-price").text();
     $(".header-container").append(`<div class="header-toast-msg"> <span>` + itemName +` is added to cart </span></div>`);
-    $(".added-items-list").append(`<div class="added-item" id ="` + itemUniqueId +`">
+    $(".added-items-list").append(`<div class="added-item" data-id ="` + itemUniqueId +` ">
                                         <div class="added-item-details">
                                             <div class="item-name-img">
                                                 <div>
@@ -140,46 +140,50 @@ $(".add-to-cart-btn").on('click',function(){
         $('.header-toast-msg').hide();
     }, 3000);
 
-    var itemCount = $(".added-item").length
-    $(".total-items-added").text('Items' + '(' + itemCount + ')')
+    var itemCount = $(".added-item").length;
+    $(".total-items-added").text('Items' + '(' + itemCount + ')');
 
     var itemPriceAdd = $(".added-item-price").text().split('$');
     var totalItemPrice = itemPriceAdd.reduce(function(a, b){
         return a*1 + b*1;
     });
-    $(".total-price").text('$' + totalItemPrice)
-
-
-    var itemDiscPrice = $(".added-disc-price").text().split('$');
-    var totalDiscItemPrice = itemDiscPrice.reduce(function(a, b){
-        return a*1 + b*1;
-    });
-
+    $(".total-price").text('$' + totalItemPrice);
     
-    $(".disc-price").text('-' + '$' + totalDiscItemPrice)
 
-    var count = 1;
-    $(".add").on('click',function(){
-        count++;
-        $(".totalCount").val(count);
-        // var itemPriceAdd = $(".added-item-price").text().split('$')[1];
-        // var newitemPrice = itemPriceAdd*count;
-        // $(".added-item-price").text('$'+ newitemPrice)
-    })
-    $(".sub").on('click',function(){
-        if (count > 1) {
-            count--;
-            $(".totalCount").val(count);
-        }  
-    })
 
-    $(".remove-item").on('click',function(){
-        $(this).parents(".added-item").hide();
-        // var cartItemId = $(".added-item").attr("id");
-        // if(uniqueId = cartItemId) {
-        //     $(".add-to-cart-btn").text("Add to cart");
-        // }
-    });
+});
+
+$(".added-items-list").on('click',".remove-item",function(){
+    var cartItemId = $(this).closest(".added-item").attr("data-id");
+    $("[data-id= " + cartItemId + " ]").find(".add-to-cart-btn").text("Add to cart");
+    $(this).parents(".added-item").remove();
+
+    var itemPriceSub = $(this).closest(".added-item").find(".added-item-price").text().split('$')[1];
+    $(".total-price").text('$' + (parseInt($(".total-price").text().split('$')[1])-(itemPriceSub)));
+
+    var itemCountRemove = $(".added-item").length;
+    $(".total-items-added").text('Items' + '(' + itemCountRemove + ')');
+});
+
+$(".added-items-list").on('click',".add",function(){
+    var  count = parseInt($(this).closest(".added-item").find(".totalCount").val());
+    $(this).closest(".added-item").find(".totalCount").val(count + 1);
+    var itemPriceAdd = $(this).closest(".added-item").find(".added-item-price").text().split('$')[1];
+    var singleItemPriceAdd = itemPriceAdd/count;
+    var newitemPrice = singleItemPriceAdd*(count + 1);
+    $(this).closest(".added-item").find(".added-item-price").text('$'+ newitemPrice);
+    $(".total-price").text('$' + (parseInt($(".total-price").text().split('$')[1])+(singleItemPriceAdd)));
+})
+$(".added-items-list").on('click',".sub",function(){
+    var  count = parseInt($(this).closest(".added-item").find(".totalCount").val());
+    if (count > 1) {
+        $(this).closest(".added-item").find(".totalCount").val(count - 1);
+        var itemPriceSub = $(this).closest(".added-item").find(".added-item-price").text().split('$')[1];
+        var singleItemPriceSub = itemPriceSub/count;
+        var newitemPriceSub = singleItemPriceSub*(count - 1);
+        $(this).closest(".added-item").find(".added-item-price").text('$'+ newitemPriceSub);
+        $(".total-price").text('$' + (parseInt($(".total-price").text().split('$')[1])-(singleItemPriceSub)));
+    }  
 })
 
 
@@ -187,7 +191,6 @@ $(".add-to-cart-btn").on('click',function(){
 //     type: "GET",
 //     dataType: "json",
 //     url: "../../../data/items.json",
-
 //     success: function (data) {
 //       console.log(data);
 //     },

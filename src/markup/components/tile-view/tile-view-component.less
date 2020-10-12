@@ -7,9 +7,10 @@
         width: 70%;
         align-self: flex-start;
         .item-details-container {
-            min-width: 275px;
+            max-width: 275px;
             margin: 20px 20px 0 0;
             border: 1px solid grey;
+            width: 100%;
             .item-image-section {
                 display: flex;
                 padding: 15px 0;
@@ -129,6 +130,10 @@
         flex-direction: column;
         .tile-view-container {
             width: auto;
+            .item-details-container {
+                width: 100%;
+                margin-right: 0;
+            }
         }
         .cart-items-calc-container {
             width: 100%;
