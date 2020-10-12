@@ -1,152 +1,33 @@
-.head {
-	background: #fff;
-	.header {
-	  &-logo {
-		img {
-		  width: 160px;
-		  height: 63px;
-		  @media screen and (min-width: 769px) {
-			height: 79px;
-			width: 210px;
-		  }
-		}
-	  }
-	  .menu-close {
-		position: relative;
-		.hamburger-menu {
-		  cursor: pointer;
-		  right: 15px;
-		  position: absolute;
-		  padding: 20px 0px;
-		  z-index: 30;
-		  @media only screen and (min-width: 769px) {
-			display: none;
-		  }
-		  .bar1,
-		  .bar2,
-		  .bar3 {
-			width: 27px;
-			height: 3px;
-			background-color: #4b4b4a;
-			margin: 5px 0px;
-			transition: 0.4s;
-		  }
-		}
-		.change {
-		  .bar1 {
-			-webkit-transform: rotate(-45deg) translate(-6px, 3px);
-			transform: rotate(-45deg) translate(-6px, 3px);
-		  }
-		  .bar2 {
-			opacity: 0;
-		  }
-		  .bar3 {
-			-webkit-transform: rotate(45deg) translate(-8px, -8px);
-			transform: rotate(45deg) translate(-8px, -6px);
-		  }
-		}
-	  }
+.header-container {
+	border-top: 1px solid grey;
+	border-bottom: 1px solid grey;
+	padding: 0 10px;
+	position: relative;
+	.header-text {
+		color: #000;
+		margin: 0;
+		padding: 5px 0;
+		font-family: 'Times New Roman', Times, serif;
 	}
-	.menu {
-	  display: none;
-	  @media only screen and (min-width: 769px) {
-		display: block;
-		&-list {
-		  margin-left: -20px;
-		  &-item {
-			.header-item {
-			  padding: 5px 20px;
-			  a {
-				&:hover {
-				  color: #286ce2;
-				  text-decoration: none;
-				}
-			  }
-			}
-		  }
+	.header-toast-msg {
+		position: absolute;
+		top: 10px;
+		left: 0;
+		right: 0;
+		text-align: center;
+		span {
+			background: limegreen;
+    		padding: 3px 10px;
 		}
-		&-options {
-			.header-item {
-			padding: 5px 20px;
-			a {
-			  &:hover {
-				color: #286ce2;
-				text-decoration: none;
-			  }
-			}
-		  }
-		}
-		.log-in {
-		  margin: 5px 0px;
-		  a {
-			text-decoration: none;
-			padding: 8px 20px;
-			background-color: #286ce2;
-			color: #fff;
-			&:hover {
-			  background-color: #2453a6;
-			}
-		  }
-		}
-	  }
 	}
-  }
-  
-  // .....Mobile Hamburger.....
-  .ham-burger-block {
-	display: none;
-	padding: 15px;
-	background: #fff;
-	box-shadow: 0 0 24px rgba(0, 0, 0, 0.2);
-	@media only screen and (min-width: 426px) {
-	  padding: 15px 40px;
+}
+@media only screen and (max-width:425px) {
+	.header-container {
+		.header-toast-msg {
+			right: 0;
+			text-align: right;
+			top: 9px;
+			margin-right: 15px;
+		}
 	}
-	.menu-list-item {
-	  margin: 0;
-	  li {
-		margin: 10px 0px;
-		a.btn-item {
-		  text-decoration: none;
-		  padding: 8px 20px;
-		  background-color: #286ce2;
-		  color: #fff;
-		  &:hover {
-			background-color: #2453a6;
-		  }
-		}
-	  }
-	}
-  }
-  
-  // .....Global CSS.....
-  ul {
-	list-style-type: none;
-	padding: 0px;
-  }
-  .btn-item {
-	  font-size: 16px;
-	  font-family: Lato;
-	  font-weight: 400;
-  }
-  .menu-list-item {
-	.menu-item {
-		text-decoration: none;
-		font-weight: 400;
-		color: #333;
-		font-size: 14px;
-		font-family: Lato;
-		&::after {
-		  content: "";
-		  display: block;
-		  width: 0;
-		  left: 0;
-		  height: 2px;
-		  background: #286ce2;
-		  transition: width 0.3s;
-		}
-		&:hover::after {
-		  width: 100%;
-		}
-	  }
-  }
-  
+}
