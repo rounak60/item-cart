@@ -156,6 +156,10 @@ $(".add-to-cart-btn").on('click',function(){
 $(".added-items-list").on('click',".remove-item",function(){
     var cartItemId = $(this).closest(".added-item").attr("data-id");
     $("[data-id= " + cartItemId + " ]").find(".add-to-cart-btn").text("Add to cart");
+    $("[data-id= " + cartItemId + " ]").find(".add-to-cart-btn").css("cursor","pointer");
+    $("[data-id= " + cartItemId + " ]").find(".add-to-cart-btn").removeAttr("disabled");
+
+
     $(this).parents(".added-item").remove();
 
     var itemPriceSub = $(this).closest(".added-item").find(".added-item-price").text().split('$')[1];
