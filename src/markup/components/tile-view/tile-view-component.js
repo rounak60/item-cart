@@ -181,7 +181,7 @@ $(".added-items-list").on('click',".remove-item",function(){
 
     var itemPriceRem = $(this).closest(".added-item").find(".added-item-price").text().split('$')[1];
     $(".total-price").text('$' + (parseInt($(".total-price").text().split('$')[1])-(itemPriceRem)));
-// debugger
+
     var itemCountRemove = $(".added-item").length;
     $(".total-items-added").text('Items' + '(' + itemCountRemove + ')');
 
@@ -193,6 +193,9 @@ $(".added-items-list").on('click',".remove-item",function(){
     if(($(".disc-price").text().split('$')[1]) == 0) {
         $(".disc-price").text('0');
     }
+
+    // var removeSubItem = $(this).parents(".cart-items-calc-container").find(".disc-price").text().split('$')[1]
+    // console.log(removeSubItem)
 
 });
 
@@ -208,12 +211,12 @@ $(".added-items-list").on('click',".add",function(){
 
     $(this).closest(".added-item").find(".added-item-price").text('$'+ newitemPrice);
     $(".total-price").text('$' + (parseInt($(".total-price").text().split('$')[1])+(singleItemPriceAdd)));
-// debugger
+
     var displayAdd = $(this).closest(".added-item").attr('data-display');
     var actualAdd = $(this).closest(".added-item").attr('data-actual');
     var singleDiscAddAmount = (displayAdd - actualAdd);
     var currentDiscAmount = parseInt($(".disc-price").text().split("$")[1]);
-    $(".disc-price").text('$' + (singleDiscAddAmount + currentDiscAmount));
+    $(".disc-price").text('-' + '$' + (singleDiscAddAmount + currentDiscAmount));
 
     var orderItemAmount = $(".total-price").text().split('$')[1];
     var orderDiscAmount = $(".disc-price").text().split('$')[1];
@@ -232,14 +235,16 @@ $(".added-items-list").on('click',".sub",function(){
 
         $(this).closest(".added-item").find(".added-item-price").text('$'+ newitemPriceSub);
         $(".total-price").text('$' + (parseInt($(".total-price").text().split('$')[1])-(singleItemPriceSub)));
-// debugger
+
         var displaySub = $(this).closest(".added-item").attr('data-display');
         var actualSub = $(this).closest(".added-item").attr('data-actual');
         var singleDiscSubAmount = (displaySub - actualSub);
-        // var singleDiscSubAmount = discSubAmount*(count - 1);
         var currentDiscSubAmt = $(".disc-price").text().split("$")[1];
-        $(".disc-price").text('$' + (currentDiscSubAmt - singleDiscSubAmount));
-        // console.log(singleDiscSubAmount)
+        $(".disc-price").text('-' + '$' + (currentDiscSubAmt - singleDiscSubAmount));
+
+        var orderItemSubAmount = $(".total-price").text().split('$')[1];
+        var orderDiscSubAmount = $(".disc-price").text().split('$')[1];
+        $(".item-sub-total").text('$' + (orderItemSubAmount - orderDiscSubAmount));
     }  
 })
 
