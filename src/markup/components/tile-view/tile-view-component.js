@@ -198,7 +198,7 @@ $(document).ready(function () {
         }else {
             $(".disc-price").text('-' + '$' + remDisc);
         }
-            $(".item-sub-total").text('$' +  ((parseInt($(".item-sub-total").text().split('$')[1])) -  ((displayRem + finalRemAmount)) ));
+            $(".item-sub-total").text('$' +  ((parseInt($(".item-sub-total").text().split('$')[1])) -  (((displayRem + finalRemAmount)*quantVal)) ));
     });
     
     // Increase same number of items in cart button
