@@ -114,18 +114,19 @@ $(".add-to-cart-btn").on('click',function(){
     var itemName = $(this).parents(".item-details-section").find(".item-name").text();
     var itemImg = $(this).parents(".item-details-container").find(".item-image-section img").attr("src");
     var itemDisplayPrice = $(this).parent().find(".item-display-price").text();
-    var itemActualPrice = $(this).parent().find(".item-actual-price").text();
+    var itemDisplayId = $(this).parent().find(".item-display-price").attr('data-display');
+    var itemActualId = $(this).parent().find(".item-actual-price").attr('data-actual');
+
     $(".header-container").append(`<div class="header-toast-msg"> <span>` + itemName +` is added to cart </span></div>`);
-    $(".added-items-list").append(`<div class="added-item" data-id ="` + itemUniqueId +` ">
+    $(".added-items-list").append(`<div class="added-item" data-id ="` + itemUniqueId +` " data-display="` + itemDisplayId + `" data-actual="` + itemActualId + `">
                                         <div class="added-item-details">
                                             <div class="item-name-img">
                                                 <div>
                                                     <img src="` + itemImg + `">
                                                 </div>   
-                                                <span class=added-item-name>` + itemName + `</span> 
+                                                <span class="added-item-name">` + itemName + `</span> 
                                                 <div class="remove-item">x</div>
                                             </div>
-                                            
                                         </div>
                                         <div class=item-add-sub> 
                                             <input type="button" value="-" class="sub" >
@@ -133,7 +134,6 @@ $(".add-to-cart-btn").on('click',function(){
                                             <input type="button" value="+" class="add" >
                                         </div>
                                         <div class="added-item-price">` + itemDisplayPrice + `</div>
-                                        <div class="added-disc-price" style="display:none;">` + itemActualPrice + `</div>
                                     </div>`);
 
     // Time out 3secs for toast message when added to cart
@@ -154,14 +154,16 @@ $(".add-to-cart-btn").on('click',function(){
     
     //Discount Price Calc
     var displayPrice = $(this).siblings(".item-price").find(".item-display-price").attr("data-display");
-    var ActualPrice = $(this).siblings(".item-price").find(".item-actual-price").attr("data-actual");
-    var discountPrice = (displayPrice - ActualPrice);
+    var actualPrice = $(this).siblings(".item-price").find(".item-actual-price").attr("data-actual");
+    var discountPrice = (displayPrice - actualPrice);
     
     discValues.push(discountPrice);
     var totalDiscPrice = discValues.reduce(function(a,b) {
     return a*1 + b*1;
-    })
-    $(".disc-price").text('$' + totalDiscPrice);   
+    });
+    var latestDiscPrice = $(".disc-price").text();
+    // console.log(latestDiscPrice)
+    $(".disc-price").text('-' + '$' + totalDiscPrice);   
 
     // Order Total Price Calc
     $(".item-sub-total").text('$' + (totalItemPrice - totalDiscPrice));
@@ -169,6 +171,7 @@ $(".add-to-cart-btn").on('click',function(){
 
 // Remove items from Cart
 $(".added-items-list").on('click',".remove-item",function(){
+    
     var cartItemId = $(this).closest(".added-item").attr("data-id");
     $("[data-id= " + cartItemId + " ]").find(".add-to-cart-btn").text("Add to cart");
     $("[data-id= " + cartItemId + " ]").find(".add-to-cart-btn").css("cursor","pointer");
@@ -176,13 +179,21 @@ $(".added-items-list").on('click',".remove-item",function(){
 
     $(this).parents(".added-item").remove();
 
-    var itemPriceSub = $(this).closest(".added-item").find(".added-item-price").text().split('$')[1];
-    $(".total-price").text('$' + (parseInt($(".total-price").text().split('$')[1])-(itemPriceSub)));
-
+    var itemPriceRem = $(this).closest(".added-item").find(".added-item-price").text().split('$')[1];
+    $(".total-price").text('$' + (parseInt($(".total-price").text().split('$')[1])-(itemPriceRem)));
+// debugger
     var itemCountRemove = $(".added-item").length;
     $(".total-items-added").text('Items' + '(' + itemCountRemove + ')');
 
-    // $(".item-sub-total").text(totalItemPrice - discountPrice);
+    var displayRem = $(this).closest(".added-item").attr('data-display');
+    var actualRem = $(this).closest(".added-item").attr('data-actual');
+    var finalRemAmount = (displayRem - actualRem);
+    var itemDescPrice = $(".cart-items-calc-container").find(".disc-price").text().split('$')[1];
+    $(".disc-price").text('$' + (itemDescPrice - finalRemAmount));
+    if(($(".disc-price").text().split('$')[1]) == 0) {
+        $(".disc-price").text('0');
+    }
+
 });
 
 // Increase same number of items in cart button
@@ -197,9 +208,17 @@ $(".added-items-list").on('click',".add",function(){
 
     $(this).closest(".added-item").find(".added-item-price").text('$'+ newitemPrice);
     $(".total-price").text('$' + (parseInt($(".total-price").text().split('$')[1])+(singleItemPriceAdd)));
+// debugger
+    var displayAdd = $(this).closest(".added-item").attr('data-display');
+    var actualAdd = $(this).closest(".added-item").attr('data-actual');
+    var singleDiscAddAmount = (displayAdd - actualAdd);
+    var currentDiscAmount = parseInt($(".disc-price").text().split("$")[1]);
+    $(".disc-price").text('$' + (singleDiscAddAmount + currentDiscAmount));
 
-
-})
+    var orderItemAmount = $(".total-price").text().split('$')[1];
+    var orderDiscAmount = $(".disc-price").text().split('$')[1];
+     $(".item-sub-total").text('$' + (orderItemAmount - orderDiscAmount));
+});
 
 //Decrease same number of items in cart button
 $(".added-items-list").on('click',".sub",function(){
@@ -213,18 +232,26 @@ $(".added-items-list").on('click',".sub",function(){
 
         $(this).closest(".added-item").find(".added-item-price").text('$'+ newitemPriceSub);
         $(".total-price").text('$' + (parseInt($(".total-price").text().split('$')[1])-(singleItemPriceSub)));
+// debugger
+        var displaySub = $(this).closest(".added-item").attr('data-display');
+        var actualSub = $(this).closest(".added-item").attr('data-actual');
+        var singleDiscSubAmount = (displaySub - actualSub);
+        // var singleDiscSubAmount = discSubAmount*(count - 1);
+        var currentDiscSubAmt = $(".disc-price").text().split("$")[1];
+        $(".disc-price").text('$' + (currentDiscSubAmt - singleDiscSubAmount));
+        // console.log(singleDiscSubAmount)
     }  
 })
 
 
-//   $.ajax({
-//     type: "GET",
-//     dataType: "json",
-//     url: "../../../data/items.json",
-//     success: function (data) {
-//       console.log(data);
-//     },
-//   });
+  $.ajax({
+    type: "GET",
+    dataType: "json",
+    url: "../../../data/items.json",
+    success: function (data) {
+      console.log(data);
+    },
+  });
 
  // $.getJSON("/src/assets/items.json", function(res) {
   //     console.log(res.items.name)
