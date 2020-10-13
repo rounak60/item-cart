@@ -161,9 +161,8 @@ $(".add-to-cart-btn").on('click',function(){
     var totalDiscPrice = discValues.reduce(function(a,b) {
     return a*1 + b*1;
     });
-    var latestDiscPrice = $(".disc-price").text();
-    // console.log(latestDiscPrice)
-    $(".disc-price").text('-' + '$' + totalDiscPrice);   
+    // var latestDiscPrice = $(".disc-price").text();
+    $(".disc-price").text('-' + '$' + totalDiscPrice);
 
     // Order Total Price Calc
     $(".item-sub-total").text('$' + (totalItemPrice - totalDiscPrice));
@@ -190,13 +189,9 @@ $(".added-items-list").on('click',".remove-item",function(){
     var finalRemAmount = (displayRem - actualRem);
     var itemDescPrice = $(".cart-items-calc-container").find(".disc-price").text().split('$')[1];
     $(".disc-price").text('$' + (itemDescPrice - finalRemAmount));
-    if(($(".disc-price").text().split('$')[1]) == 0) {
+    if(($(".disc-price").text().split('$')[1]) === 0) {
         $(".disc-price").text('0');
     }
-
-    // var removeSubItem = $(this).parents(".cart-items-calc-container").find(".disc-price").text().split('$')[1]
-    // console.log(removeSubItem)
-
 });
 
 // Increase same number of items in cart button
